@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 
 namespace TechJobsConsoleAutograded6
 {
@@ -135,8 +137,35 @@ namespace TechJobsConsoleAutograded6
         // TODO: complete the PrintJobs method.
         public void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+
+                string csvFilePath = "job_data.csv";
+                string[] lines = File.ReadAllLines(csvFilePath);
+                // Skip the first line since it contains column headers
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    string[] values = lines[i].Split(',');
+                    string name = values[0];
+                    string employer = values[1];
+                    string location = values[2];
+                    string positionType = values[3];
+                    string coreCompetency = values[4];
+                    string output = $"   *****\n" +
+                                    $"   position type: {positionType}\n" +
+                                    $"   name: {name}\n" +
+                                    $"   employer: {employer}\n" +
+                                    $"   location: {location}\n" +
+                                    $"   core competency: {coreCompetency}\n" +
+                                    $"   *****\n";
+                    Console.WriteLine(output);
+                }
+            
         }
+
+
+
+
+
+        
     }
 }
 
