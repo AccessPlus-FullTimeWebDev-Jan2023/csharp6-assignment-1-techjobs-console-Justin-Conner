@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Reflection.PortableExecutable;
 
 namespace TechJobsConsoleAutograded6
 {
-	public class TechJobs
-	{
+    public class TechJobs
+    {
         public void RunProgram()
         {
             // Create two Dictionary vars to hold info for menu and data
@@ -45,6 +43,7 @@ namespace TechJobsConsoleAutograded6
                     }
                     else
                     {
+
                         List<string> results = JobData.FindAll(columnChoice);
 
                         Console.WriteLine(Environment.NewLine + "*** All " + columnChoices[columnChoice] + " Values ***");
@@ -66,7 +65,9 @@ namespace TechJobsConsoleAutograded6
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        List<Dictionary<string, string>> searchResults =
+                       JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -134,38 +135,26 @@ namespace TechJobsConsoleAutograded6
             return choiceKeys[choiceIdx];
         }
 
-        // TODO: complete the PrintJobs method.
+        // TODO: complete the PrintJobs method.//write if statement!!!
         public void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("No results");
+            }`
 
-                string csvFilePath = "job_data.csv";
-                string[] lines = File.ReadAllLines(csvFilePath);
-                // Skip the first line since it contains column headers
-                for (int i = 1; i < lines.Length; i++)
+            foreach (Dictionary<string, string> job in someJobs)
+            {
+
+                Console.WriteLine($"{Environment.NewLine}*****");
+                foreach (KeyValuePair<string, string> kvp in job)
                 {
-                    string[] values = lines[i].Split(',');
-                    string name = values[0];
-                    string employer = values[1];
-                    string location = values[2];
-                    string positionType = values[3];
-                    string coreCompetency = values[4];
-                    string output = $"   *****\n" +
-                                    $"   position type: {positionType}\n" +
-                                    $"   name: {name}\n" +
-                                    $"   employer: {employer}\n" +
-                                    $"   location: {location}\n" +
-                                    $"   core competency: {coreCompetency}\n" +
-                                    $"   *****\n";
-                    Console.WriteLine(output);
+                    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+
                 }
-            
+                Console.WriteLine("*****");
+
+            }
         }
-
-
-
-
-
-        
     }
 }
-
