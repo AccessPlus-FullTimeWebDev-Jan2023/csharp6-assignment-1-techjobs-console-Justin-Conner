@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace TechJobsConsoleAutograded6
 {
-	public class JobData
-	{
+    public class JobData
+    {
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
 
@@ -44,10 +44,23 @@ namespace TechJobsConsoleAutograded6
         //TODO: Complete the FindByValue method
         public static List<Dictionary<string, string>> FindByValue(string value)
         {
+            //.Contains(value);
             // load data, if not already loaded
             LoadData();
+            List<Dictionary<string, string>> newList = new List<Dictionary<string, string>>();
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                foreach (string thing in job.Keys)
+                {
+                    if (job[thing].ToLower().Contains(value.ToLower()))
+                    {
+                        newList.Add(job);
+                    }
+                }
+            }
 
-            return null;
+
+            return newList;
         }
 
         /**
@@ -70,7 +83,7 @@ namespace TechJobsConsoleAutograded6
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -161,4 +174,3 @@ namespace TechJobsConsoleAutograded6
         }
     }
 }
-
