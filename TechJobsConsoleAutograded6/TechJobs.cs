@@ -141,7 +141,7 @@ namespace TechJobsConsoleAutograded6
             if (someJobs.Count == 0)
             {
                 Console.WriteLine("No results");
-            }`
+            }
 
             foreach (Dictionary<string, string> job in someJobs)
             {
